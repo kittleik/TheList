@@ -3,15 +3,15 @@ package thelist.levelasian.ntnu.thelist;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ExpandableListView;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -19,36 +19,57 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 
 public class ListActivity extends ActionBarActivity {
 
-    TextView list;
-    Firebase listFb;
-    Button makeParty;
+    private static String TAG = SplashActivity.class.getName();
+    private boolean first = true;
+
+    private Button makeParty;
+
+    ArrayList<Party> theList;
+
+    private TextView tw;
+    private RecyclerView partyList;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-        Firebase.setAndroidContext(this);
 
-        listFb = new Firebase("https://thelist.firebaseio.com");
+        Intent i = getIntent();
+        theList = (ArrayList<Party>)i.getSerializableExtra("theList");
+        first = false;
 
-        list = (TextView) findViewById(R.id.textView);
+        partyList = (RecyclerView) findViewById(R.id.recyclerView);
+        partyList.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        partyList.setLayoutManager(mLayoutManager);
+        tw = (TextView) findViewById(R.id.textView);
+        if(theList.isEmpty()){
+
+            tw.setText("Ingen fester i nærheten. Lag fest, fitte.");
+        }else {
+            tw.setText("");
+        }
+        mAdapter = new MyAdapter(theList);
+        Collections.sort(theList, new DateComp());
+        partyList.setAdapter(mAdapter);
+
         makeParty = (Button) findViewById(R.id.button);
-
-        /**Party asdf = new Party("Thex","Pelle",12345432,19,new Timestamp(2015,2,20,20,0,0,0));
-        Party fdsa = new Party("untsunts", "Kåre",65436789,21,new Timestamp(2015,2,19,19,0,0,0));
-
-        listFb = listFb.child("parties");
-        Map<String, Party> parties = new HashMap<String, Party>();
-        parties.put("x", asdf);
-        parties.put("unts", fdsa);
-
-        listFb.setValue(parties);**/
 
         makeParty.setOnClickListener(new Button.OnClickListener(){
 
@@ -62,49 +83,11 @@ public class ListActivity extends ActionBarActivity {
 
         });
 
-        final String partyName, hostName;
-        int phoneNumber, hostAge;
-        final Timestamp timestamp;
-
-        listFb = listFb.child("parties");
+        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //fab.attachToRecyclerView(partyList);
 
 
-        listFb.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                Map asd = dataSnapshot.getValue(Map.class);
-                Party tempParty = new Party(dataSnapshot.getKey());
-                tempParty.setDateTime(Timestamp.valueOf(asd.get("dateTime").toString()));
-                tempParty.setNumber(asd.get("phoneNumber").toString());
-                tempParty.setPartyName(asd.get("partyName").toString());
-                tempParty.setHostName(asd.get("hostName").toString());
-
-                list.append(tempParty.toString()+"\n\n");
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,12 +103,8 @@ public class ListActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
 }
+

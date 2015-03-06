@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/MintCream">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="358dp"
+        android:layout_marginTop="160dp">
+
+        <TextView
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="&quot;Det er to ting jeg kan her i livet - Sjarmere jenter og fitte.&quot;"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="- Alf Johansen, \n   Co-founder"
+            android:id="@+id/textView8"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+    </LinearLayout>
+</LinearLayout>

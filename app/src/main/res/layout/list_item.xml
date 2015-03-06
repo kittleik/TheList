@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/DeepSkyBlue">
+
+        <TextView
+            android:id="@+id/partyNameView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/button_material_dark"
+            android:text="Party Name"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:textSize="35dp"/>
+
+        <TextView
+            android:id="@+id/dateTimeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today 20:00"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:layout_below="@id/partyNameView"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/hostNameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Host Name"
+            android:gravity="center_vertical"
+            android:textSize="25dp"
+            android:layout_below="@id/dateTimeView"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/phoneNumberView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="918 28 382"
+            android:textSize="30dp"
+            android:layout_marginTop="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_below="@id/dateTimeView"
+            />
+
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>

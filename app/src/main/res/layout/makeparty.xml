@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@color/MintCream">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="334dp"
-        android:layout_weight="1.12"
+        android:layout_weight="1.13"
         android:weightSum="1">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/DeepSkyBlue">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -78,30 +80,35 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="0.19">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="Select Date"
                 android:id="@+id/button4" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="39dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/textView2"
-                android:text="" />
+                android:text="2015-03-06" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="match_parent"
+            android:layout_height="119dp"
+            android:weightSum="1"
+            android:layout_weight="0.39">
 
             <Button
                 android:layout_width="wrap_content"
@@ -110,14 +117,24 @@
                 android:id="@+id/button5" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="97dp"
                 android:layout_height="41dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text=""
+                android:text="20:00"
                 android:id="@+id/textView3" />
+
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Fest med måte"
+            android:id="@+id/textView9"
+            android:layout_gravity="center_horizontal" />
+
     </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -139,4 +156,5 @@
             android:id="@+id/button3"
             android:layout_weight="0.39" />
     </LinearLayout>
+
 </LinearLayout>
