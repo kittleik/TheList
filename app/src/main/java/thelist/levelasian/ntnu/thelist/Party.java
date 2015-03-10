@@ -14,6 +14,8 @@ public class Party implements Serializable{
     private Timestamp dateTime;
     private String phoneNumber;
     private String id;
+    private double alt,lat,lon;
+    private long time;
 
     public Party(String id){
         this.partyName = "Not defined";
@@ -57,16 +59,36 @@ public class Party implements Serializable{
 
         return b;
     }
-    public String getTime(){
-        String res;
-        Integer temp = new Integer(dateTime.getHours());
-        res = temp.toString();
-        temp = dateTime.getMinutes();
-        String tempString = "";
-        if( temp < 10)tempString="0";
-        tempString = tempString+temp.toString();
-        res = res+":"+tempString;
-        return res;
+    public String getClockTime(){
+        String ho,m;
+        Integer hour,min;
+        hour = Integer.valueOf(dateTime.getHours());
+        min = Integer.valueOf(dateTime.getMinutes());
+        if(hour < 10) ho = "0"+hour.toString();
+        else ho= hour.toString();
+        if(min < 10) m = "0"+min.toString();
+        else m= min.toString();
+
+        return ho+":"+m;
+    }
+
+    public void setLocation(double alt, double lat, double lon){
+        this.alt = alt;
+        this.lat = lat;
+        this.lon = lon;
+    }
+    public double getLon() {
+        return lon;
+    }
+    public double getAlt() {
+        return alt;
+    }
+    public double getLat() {
+        return lat;
+    }
+    public Long getTime(){
+        time = dateTime.getTime();
+        return time;
     }
     public void setHostName(String hostName){
         this.hostName = hostName;

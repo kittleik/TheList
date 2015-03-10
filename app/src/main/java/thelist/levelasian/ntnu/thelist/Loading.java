@@ -3,6 +3,7 @@ package thelist.levelasian.ntnu.thelist;
 import android.app.Activity;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -28,6 +29,8 @@ public class Loading extends Activity {
     ArrayList<Party> theList;
 
     private Firebase listFb;
+
+    Location loc;
 
 
 
@@ -55,6 +58,9 @@ public class Loading extends Activity {
                 tempParty.setNumber(asd.get("phoneNumber").toString());
                 tempParty.setPartyName(asd.get("partyName").toString());
                 tempParty.setHostName(asd.get("hostName").toString());
+                tempParty.setLocation(Double.parseDouble(asd.get("alt").toString()),
+                        Double.parseDouble(asd.get("lat").toString()),
+                        Double.parseDouble(asd.get("lon").toString()));
                 theList.add(tempParty);
             }
 

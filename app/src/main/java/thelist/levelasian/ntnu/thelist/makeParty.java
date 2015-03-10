@@ -3,7 +3,11 @@ package thelist.levelasian.ntnu.thelist;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -51,6 +55,9 @@ public class makeParty extends ActionBarActivity {
     private int month;
     private int day;
 
+    private Location loc;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.makeparty);
@@ -58,6 +65,9 @@ public class makeParty extends ActionBarActivity {
         listFb = new Firebase("https://thelist.firebaseio.com");
 
         Firebase.setAndroidContext(this);
+
+        Intent i = getIntent();
+        loc = (Location)i.getSerializableExtra("location");
 
         listFb2 = new Firebase("https://thelist.firebaseio.com/parties");
         theList = new ArrayList<Party>();
@@ -73,6 +83,11 @@ public class makeParty extends ActionBarActivity {
                 tempParty.setNumber(asd.get("phoneNumber").toString());
                 tempParty.setPartyName(asd.get("partyName").toString());
                 tempParty.setHostName(asd.get("hostName").toString());
+
+                tempParty.setLocation(Double.parseDouble(asd.get("alt").toString()),
+                        Double.parseDouble(asd.get("lat").toString()),
+                        Double.parseDouble(asd.get("lon").toString()));
+
                 theList.add(tempParty);
             }
 
@@ -143,21 +158,26 @@ public class makeParty extends ActionBarActivity {
                 if(eName.getText().toString().isEmpty()){
                     eName.setText("You need to specify a name");
                 }
-                else if(ePartyName.getText().toString().isEmpty()){
-                    ePartyName.setText("You need to specify a party name");
-                }
                 else {
-                    Map<String, String> parties = new HashMap<String, String>();
-                    parties.put("dateTime", text_date.getText().toString() + " " + text_time.getText().toString() + ":00.000");
-                    parties.put("hostName", eName.getText().toString());
-                    parties.put("phoneNumber", eNr.getText().toString());
-                    parties.put("partyName", ePartyName.getText().toString());
+                    if (loc == null){
+                        ePartyName.setText("WTF");
+                    } else {
+                        Map<String, String> parties = new HashMap<String, String>();
+                        parties.put("dateTime", text_date.getText().toString() + " " + text_time.getText().toString() + ":00.000");
+                        parties.put("hostName", eName.getText().toString());
+                        parties.put("phoneNumber", eNr.getText().toString());
+                        parties.put("partyName", ePartyName.getText().toString());
+                        parties.put("alt", String.valueOf(loc.getAltitude()));
+                        parties.put("lat", String.valueOf(loc.getLatitude()));
+                        parties.put("lon", String.valueOf(loc.getLongitude()));
 
-                    listFb.push().setValue(parties);
-                    Intent intent = new Intent();
-                    intent.putExtra("theList", theList);
-                    intent.setClass(makeParty.this, Loading.class);
-                    startActivity(intent);
+                        listFb.push().setValue(parties);
+                        Intent intent = new Intent();
+                        intent.putExtra("theList", theList);
+                        intent.putExtra("location", loc);
+                        intent.setClass(makeParty.this, Loading.class);
+                        startActivity(intent);
+                    }
                 }
             }
 
@@ -174,7 +194,10 @@ public class makeParty extends ActionBarActivity {
             }
 
         });
-
+        GPSTracker gps = new GPSTracker(this);
+        if(gps.canGetLocation()){
+            loc =gps.getLocation();
+        }
     }
     @Override
     protected Dialog onCreateDialog(int id) {

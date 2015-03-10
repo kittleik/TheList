@@ -6,22 +6,22 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    card_view:cardCornerRadius="4dp"
+    card_view:cardCornerRadius="0dp"
     android:layout_margin="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/DeepSkyBlue">
+        android:background="#E3DFD7">
 
         <TextView
             android:id="@+id/partyNameView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/button_material_dark"
+            android:background="#EF6555"
             android:text="Party Name"
             android:gravity="center_vertical"
-            android:textColor="@android:color/white"
+            android:textColor="#E3DFD7"
             android:textSize="35dp"/>
 
         <TextView

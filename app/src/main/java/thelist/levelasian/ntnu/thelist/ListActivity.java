@@ -1,6 +1,10 @@
 package thelist.levelasian.ntnu.thelist;
 
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,6 +46,8 @@ public class ListActivity extends ActionBarActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private Location loc;
+
 
 
     @Override
@@ -51,6 +57,8 @@ public class ListActivity extends ActionBarActivity {
 
         Intent i = getIntent();
         theList = (ArrayList<Party>)i.getSerializableExtra("theList");
+        loc = (Location)i.getSerializableExtra("location");
+
         first = false;
 
         partyList = (RecyclerView) findViewById(R.id.recyclerView);
@@ -65,7 +73,35 @@ public class ListActivity extends ActionBarActivity {
         }else {
             tw.setText("");
         }
-        mAdapter = new MyAdapter(theList);
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                loc = location;
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+        GPSTracker gps = new GPSTracker(this);
+        if(gps.canGetLocation()){
+            loc =gps.getLocation();
+        }
+
+        mAdapter = new MyAdapter(theList,loc);
         Collections.sort(theList, new DateComp());
         partyList.setAdapter(mAdapter);
 
@@ -76,9 +112,10 @@ public class ListActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent callSub = new Intent();
-                callSub.setClass(ListActivity.this, makeParty.class);
+                Intent callSub = new Intent().setClass(ListActivity.this, makeParty.class);
+                callSub.putExtra("location", loc);
                 startActivity(callSub);
+                ListActivity.this.finish();
             }
 
         });
@@ -88,7 +125,6 @@ public class ListActivity extends ActionBarActivity {
 
 
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

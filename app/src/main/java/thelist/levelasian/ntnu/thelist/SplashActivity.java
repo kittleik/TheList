@@ -2,7 +2,11 @@ package thelist.levelasian.ntnu.thelist;
 
 import android.app.Activity;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -28,8 +32,7 @@ public class SplashActivity extends Activity {
     ArrayList<Party> theList;
 
     private Firebase listFb;
-
-
+    Location loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +40,19 @@ public class SplashActivity extends Activity {
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);    // Removes title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,     WindowManager.LayoutParams.FLAG_FULLSCREEN);    // Removes notification bar
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
 
         setContentView(R.layout.splash);
         Firebase.setAndroidContext(this);
 
         listFb = new Firebase("https://thelist.firebaseio.com/parties");
         theList = new ArrayList<Party>();
+
+        GPSTracker gps = new GPSTracker(this);
+        if(gps.canGetLocation()){
+            loc =gps.getLocation();
+        }
 
         listFb.addChildEventListener(new ChildEventListener() {
 
@@ -55,6 +65,9 @@ public class SplashActivity extends Activity {
                 tempParty.setNumber(asd.get("phoneNumber").toString());
                 tempParty.setPartyName(asd.get("partyName").toString());
                 tempParty.setHostName(asd.get("hostName").toString());
+                tempParty.setLocation(Double.parseDouble(asd.get("alt").toString()),
+                        Double.parseDouble(asd.get("lat").toString()),
+                        Double.parseDouble(asd.get("lon").toString()));
                 theList.add(tempParty);
             }
 
@@ -79,8 +92,6 @@ public class SplashActivity extends Activity {
             }
 
         });
-
-        // Start timer and launch main activity
         IntentLauncher launcher = new IntentLauncher();
         launcher.start();
     }
@@ -100,6 +111,7 @@ public class SplashActivity extends Activity {
             // Start main activity
             Intent intent = new Intent(SplashActivity.this, ListActivity.class);
             intent.putExtra("theList",theList);
+            intent.putExtra("location",loc);
             SplashActivity.this.startActivity(intent);
             SplashActivity.this.finish();
         }
