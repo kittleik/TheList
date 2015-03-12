@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -41,7 +42,7 @@ public class makeParty extends ActionBarActivity {
 
     private Firebase listFb2;
     EditText eName, eNr, ePartyName, eDate;
-    Button create, cancel;
+    Button create, cancel,selectLoc;
     Firebase listFb;
     static final int DATE_DIALOG_ID = 100;
     static final int TIME_DIALOG_ID = 101;
@@ -65,6 +66,8 @@ public class makeParty extends ActionBarActivity {
         listFb = new Firebase("https://thelist.firebaseio.com");
 
         Firebase.setAndroidContext(this);
+
+        RadioButton rb;
 
         Intent i = getIntent();
         loc = (Location)i.getSerializableExtra("location");
@@ -119,8 +122,14 @@ public class makeParty extends ActionBarActivity {
         text_date = (TextView) findViewById(R.id.textView2);
         text_time = (TextView) findViewById(R.id.textView3);
 
+
+
         create = (Button) findViewById(R.id.button2);
         cancel = (Button) findViewById(R.id.button3);
+        selectLoc = (Button) findViewById(R.id.selectLoc);
+
+        rb = (RadioButton) findViewById(R.id.radioButton);
+
         listFb = listFb.child("parties");
         Button btn = (Button) findViewById(R.id.button4);
         Button btnTime = (Button) findViewById(R.id.button5);
@@ -149,7 +158,17 @@ public class makeParty extends ActionBarActivity {
                 showDialog(TIME_DIALOG_ID);
             }
         });
+        cancel.setOnClickListener(new Button.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent();
+                intent.setClass(makeParty.this, ListActivity.class);
+                startActivity(intent);
+            }
+
+        });
         create.setOnClickListener(new Button.OnClickListener() {
 
             @Override
@@ -182,14 +201,14 @@ public class makeParty extends ActionBarActivity {
             }
 
         });
-        cancel.setOnClickListener(new Button.OnClickListener(){
+        selectLoc.setOnClickListener(new Button.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent();
                 intent.putExtra("theList",theList);
-                intent.setClass(makeParty.this, ListActivity.class);
+                intent.setClass(makeParty.this, SelectionMap.class);
                 startActivity(intent);
             }
 

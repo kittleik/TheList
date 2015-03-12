@@ -74,6 +74,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         float dist =0;
         if(loc != null){
             dist = loc.distanceTo(loc2);
+            holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime()+" "+Float.toString(dist)+"m");
+        }else{
+            holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime());
         }
 
         holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime()+" "+Float.toString(dist)+"m");
