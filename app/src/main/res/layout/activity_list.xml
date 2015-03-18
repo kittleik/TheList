@@ -36,19 +36,19 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
-            <Button
-                android:layout_width="66dp"
-                android:layout_height="66dp"
-                android:text="+"
-                android:id="@+id/button"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:bottomLeftRadius="8dp"
-                android:background="@drawable/roundedbutton"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="15dp" />
+            <!--<Button-->
+                <!--android:layout_width="66dp"-->
+                <!--android:layout_height="66dp"-->
+                <!--android:text="+"-->
+                <!--android:id="@+id/button"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:layout_weight="1"-->
+                <!--android:bottomLeftRadius="8dp"-->
+                <!--android:background="@drawable/roundedbutton"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_marginBottom="15dp" />-->
 
             <TextView
                 android:layout_width="197dp"
@@ -59,9 +59,10 @@
                 android:layout_gravity="bottom"
                 android:layout_alignBaseline="@+id/recyclerView"
                 android:layout_alignBottom="@+id/recyclerView"
-                android:layout_toLeftOf="@+id/button"
-                android:layout_toStartOf="@+id/button"
                 android:layout_marginBottom="250dp"/>
+<!--                android:layout_toLeftOf="@+id/button"
+                android:layout_toStartOf="@+id/button"-->
+
 
 
         </RelativeLayout>

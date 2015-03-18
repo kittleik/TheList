@@ -163,9 +163,11 @@ public class makeParty extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent();
-                intent.setClass(makeParty.this, ListActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(makeParty.this, ListActivity.class);
+                intent.putExtra("theList",theList);
+                intent.putExtra("location",loc);
+                makeParty.this.startActivity(intent);
+                makeParty.this.finish();
             }
 
         });
@@ -206,10 +208,11 @@ public class makeParty extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent();
+                Intent intent = new Intent(makeParty.this, SelectionMap.class);
                 intent.putExtra("theList",theList);
-                intent.setClass(makeParty.this, SelectionMap.class);
-                startActivity(intent);
+                intent.putExtra("location",loc);
+                makeParty.this.startActivity(intent);
+                makeParty.this.finish();
             }
 
         });

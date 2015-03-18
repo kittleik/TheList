@@ -83,20 +83,21 @@ public class ListActivity extends ActionBarActivity {
         Collections.sort(theList, new DateComp());
         partyList.setAdapter(mAdapter);
 
-        makeParty = (Button) findViewById(R.id.button);
-
-        makeParty.setOnClickListener(new Button.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent callSub = new Intent().setClass(ListActivity.this, makeParty.class);
-                callSub.putExtra("location", loc);
-                startActivity(callSub);
-                ListActivity.this.finish();
-            }
-
-        });
+//        makeParty = (Button) findViewById(R.id.button);
+//
+//        makeParty.setOnClickListener(new Button.OnClickListener(){
+//
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                Intent intent = new Intent(ListActivity.this, makeParty.class);
+//                intent.putExtra("theList",theList);
+//                intent.putExtra("location",loc);
+//                ListActivity.this.startActivity(intent);
+//                ListActivity.this.finish();
+//            }
+//
+//        });
 
         //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         //fab.attachToRecyclerView(partyList);

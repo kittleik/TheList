@@ -3,11 +3,13 @@ package thelist.levelasian.ntnu.thelist;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import java.sql.Timestamp;
@@ -41,9 +43,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
         @Override
         public void onClick(View v){
-            Uri number = Uri.parse("tel:"+ vPhoneNumber.getText());
-            Intent intent = new Intent(Intent.ACTION_DIAL, number);
-            v.getContext().startActivity(intent);
+           // Uri number = Uri.parse("tel:"+ vPhoneNumber.getText());
+           // Intent intent = new Intent(Intent.ACTION_DIAL, number);
+            // v.getContext().startActivity(intent);
+
         }
 
     }

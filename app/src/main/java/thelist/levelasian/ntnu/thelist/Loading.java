@@ -85,6 +85,10 @@ public class Loading extends Activity {
             }
 
         });
+        GPSTracker gps = new GPSTracker(this);
+        if(gps.canGetLocation()){
+            loc =gps.getLocation();
+        }
 
         // Start timer and launch main activity
         IntentLauncher launcher = new IntentLauncher();
@@ -106,6 +110,7 @@ public class Loading extends Activity {
             // Start main activity
             Intent intent = new Intent(Loading.this, ListActivity.class);
             intent.putExtra("theList",theList);
+            intent.putExtra("location",loc);
             Loading.this.startActivity(intent);
             Loading.this.finish();
         }
