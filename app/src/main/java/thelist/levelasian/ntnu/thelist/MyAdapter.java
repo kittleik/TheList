@@ -1,17 +1,24 @@
 package thelist.levelasian.ntnu.thelist;
 
+import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -23,21 +30,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     java.util.Date date= new java.util.Date();
     private Timestamp now = new Timestamp(date.getTime());
     private Location loc;
-
+    static OnItemClickListener mItemClickListener;
     public static class ViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         protected TextView vPartyName;
-        protected TextView vHostName;
-        protected TextView vPhoneNumber;
         protected TextView vDateTime;
+        protected ImageView vPartyImage;
 
         public ViewHolder(View v) {
             super(v);
             vPartyName = (TextView) v.findViewById(R.id.partyNameView);
-            vHostName = (TextView) v.findViewById(R.id.hostNameView);
-            vPhoneNumber = (TextView) v.findViewById(R.id.phoneNumberView);
             vDateTime = (TextView) v.findViewById(R.id.dateTimeView);
+            vPartyImage = (ImageView) v.findViewById(R.id.imageView);
             v.setOnClickListener(this);
 
         }
@@ -46,7 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
            // Uri number = Uri.parse("tel:"+ vPhoneNumber.getText());
            // Intent intent = new Intent(Intent.ACTION_DIAL, number);
             // v.getContext().startActivity(intent);
-
+            mItemClickListener.onItemClick(v, getPosition());
         }
 
     }
@@ -54,6 +59,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public MyAdapter(List<Party> partyList, Location loc){
         this.loc = loc;
         this.partyList = partyList;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view , int position);
+    }
+
+    public RecyclerView.Adapter SetOnItemClickListener(final OnItemClickListener mItemClickListener){
+        this.mItemClickListener = mItemClickListener;
+        return this;
     }
 
     @Override
@@ -83,9 +97,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         }
 
         holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime()+" "+Float.toString(dist)+"m");
-        holder.vPhoneNumber.setText(p.getNumber());
-        holder.vHostName.setText(p.getHostName());
         holder.vPartyName.setText(p.getPartyName());
+        new DownloadImageTask(holder.vPartyImage)
+                .execute("http://storage.googleapis.com/cuntdestroyerz.com/playstore-icon.png");
     }
 
     @Override
@@ -93,4 +107,30 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         return partyList.size();
     }
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
 }
+
+

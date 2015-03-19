@@ -7,11 +7,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.internal.widget.AdapterViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
@@ -79,7 +81,20 @@ public class ListActivity extends ActionBarActivity {
             loc =gps.getLocation();
         }
 
-        mAdapter = new MyAdapter(theList,loc);
+        mAdapter = new MyAdapter(theList,loc).SetOnItemClickListener(new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+                Party p = theList.get(position);
+
+                Intent intent = new Intent(ListActivity.this, PartyInfo.class);
+                intent.putExtra("party",p);
+                intent.putExtra("location",loc);
+                ListActivity.this.startActivity(intent);
+
+            }
+        });
+
         Collections.sort(theList, new DateComp());
         partyList.setAdapter(mAdapter);
 
