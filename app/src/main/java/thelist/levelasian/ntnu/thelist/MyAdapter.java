@@ -37,12 +37,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         protected TextView vPartyName;
         protected TextView vDateTime;
         protected ImageView vPartyImage;
+        protected TextView vDistance;
 
         public ViewHolder(View v) {
             super(v);
             vPartyName = (TextView) v.findViewById(R.id.partyNameView);
             vDateTime = (TextView) v.findViewById(R.id.dateTimeView);
             vPartyImage = (ImageView) v.findViewById(R.id.imageView);
+            vDistance = (TextView) v.findViewById(R.id.distanceView);
             v.setOnClickListener(this);
 
         }
@@ -91,15 +93,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         float dist =0;
         if(loc != null){
             dist = loc.distanceTo(loc2);
-            holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime()+" "+Float.toString(dist)+"m");
+            holder.vDistance.setText(Float.toString(dist)+" m");
         }else{
-            holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime());
+            holder.vDistance.setText("");
         }
 
-        holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime()+" "+Float.toString(dist)+"m");
+        holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime());
         holder.vPartyName.setText(p.getPartyName());
         new DownloadImageTask(holder.vPartyImage)
-                .execute("http://storage.googleapis.com/cuntdestroyerz.com/playstore-icon.png");
+                .execute("http://www.youtodesign.com/uploads/allimg/1308/1331.jpg");
     }
 
     @Override
@@ -107,30 +109,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         return partyList.size();
     }
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
 }
 
 

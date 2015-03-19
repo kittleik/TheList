@@ -17,17 +17,18 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:id="@+id/imageView"/>
+            android:id="@+id/imageView"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/partyNameView"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:text="Party Name"
+            android:background = "@color/accent_material_dark"
             android:gravity="center_vertical"
-            android:textColor="@color/DarkGray"
-            android:textSize="40dp"
-            android:layout_below="@id/imageView"/>
+            android:textColor="@color/background_material_dark"
+            android:textSize="40dp"/>
 
         <TextView
             android:id="@+id/dateTimeView"
@@ -36,9 +37,7 @@
             android:text="Today 20:00"
             android:gravity="center_vertical"
             android:textSize="20dp"
-            android:layout_below="@id/imageView"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@id/imageView" />
         <TextView
             android:id="@+id/distanceView"
             android:layout_width="wrap_content"
@@ -46,9 +45,7 @@
             android:text="3 km"
             android:gravity="center_vertical"
             android:textSize="15dp"
-            android:layout_below="@id/dateTimeView"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@id/dateTimeView"/>
 
 
 

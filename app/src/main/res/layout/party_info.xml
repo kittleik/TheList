@@ -3,18 +3,86 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Party Name"
-        android:id="@+id/partyNameText"
-        android:layout_gravity="center_horizontal" />
+        android:background="@color/WhiteSmoke">
 
-    <Button
-        android:layout_width="wrap_content"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/imageView"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/partyNameView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Party Name"
+            android:gravity="center_vertical"
+            android:textColor="@color/background_material_dark"
+            android:textSize="40dp"/>
+
+        <TextView
+            android:id="@+id/dateTimeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today 20:00"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:layout_below="@id/imageView" />
+        <TextView
+            android:id="@+id/distanceView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 km"
+            android:gravity="center_vertical"
+            android:textSize="15dp"
+            android:layout_below="@id/dateTimeView"/>
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="call"
-        android:id="@+id/callButton" />
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Description:"
+                android:id="@+id/textView11"
+                android:textSize="23dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempor tempor posuere. Nunc malesuada ex nec dolor vehicula, in sodales leo semper. Mauris lacinia enim eget justo semper, a sagittis dui congue. Cras dapibus pretium lobortis. Pellentesque dapibus feugiat consectetur. Sed eget sapien felis. In et sem a velit sodales mattis. Duis eget efficitur lorem. Aenean non feugiat erat. Morbi lectus ligula, dignissim vitae venenatis tempus, dictum at augue. Donec risus augue, venenatis a odio condimentum, feugiat ullamcorper sem."
+                android:id="@+id/textView10"
+                android:layout_weight="0.46"
+                android:textSize="20dp"
+                android:layout_marginTop="6dp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="call"
+                android:id="@+id/callButton"
+                android:layout_below="@id/distanceView"
+                android:layout_gravity="right"
+                android:layout_weight="0.17" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>

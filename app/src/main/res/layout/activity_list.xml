@@ -5,23 +5,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0dp"
     android:paddingBottom="0dp" tools:context=".ListActivity"
-    android:background="#C29D4E">
+    android:background="@color/Black">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:weightSum="1">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="GuestList v0.98"
-            android:id="@+id/textView7"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginBottom="6dp"/>
 
         <RelativeLayout
             android:layout_width="fill_parent"

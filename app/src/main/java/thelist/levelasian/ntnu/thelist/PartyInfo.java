@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class PartyInfo extends Activity {
         p = (Party)i.getSerializableExtra("party");
         loc = (Location)i.getSerializableExtra("location");
 
-        pNText = (TextView) findViewById(R.id.partyNameText);
+        pNText = (TextView) findViewById(R.id.partyNameView);
         pNText.setText(p.getPartyName());
         call = (Button) findViewById(R.id.callButton);
         call.setOnClickListener(new View.OnClickListener() {
@@ -39,5 +40,8 @@ public class PartyInfo extends Activity {
                 PartyInfo.this.startActivity(intent);
             }
         });
+
+        new DownloadImageTask((ImageView) findViewById(R.id.imageView))
+                .execute("http://storage.googleapis.com/cuntdestroyerz.com/playstore-icon.png");
     }
 }
