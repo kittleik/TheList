@@ -73,7 +73,7 @@ public class ListActivity extends ActionBarActivity {
 
             tw.setText("Ingen fester i nærheten. Lag fest, fitte.");
         }else {
-            tw.setText("");
+            tw.setText("Browse");
         }
 
         GPSTracker gps = new GPSTracker(this);

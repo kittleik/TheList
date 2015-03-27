@@ -42,6 +42,6 @@ public class PartyInfo extends Activity {
         });
 
         new DownloadImageTask((ImageView) findViewById(R.id.imageView))
-                .execute("http://www.youtodesign.com/uploads/allimg/1308/1331.jpg");
+                .execute("http://storage.googleapis.com/party_pictures/partu.gif");
     }
 }

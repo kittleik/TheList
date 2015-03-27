@@ -98,10 +98,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             holder.vDistance.setText("");
         }
 
-        holder.vDateTime.setText(p.getDay()+ " " + "klokken "+ p.getClockTime());
+        holder.vDateTime.setText(p.getDay()+ " "+ p.getClockTime());
         holder.vPartyName.setText(p.getPartyName());
         new DownloadImageTask(holder.vPartyImage)
-                .execute("http://www.youtodesign.com/uploads/allimg/1308/1331.jpg");
+                .execute("http://storage.googleapis.com/party_pictures/partu.gif");
     }
 
     @Override

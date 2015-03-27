@@ -37,19 +37,19 @@ public class Party implements Serializable{
         int a = cal.get(java.util.Calendar.DAY_OF_WEEK);
         Integer datei = new Integer(dateTime.getDate());
         switch(a){
-            case 2: b = "Mandag"+" "+datei.toString()+".";
+            case 2: b = "Mandag";
                 break;
-            case 3: b = "Tirsdag"+" "+datei.toString()+".";
+            case 3: b = "Tirsdag";
                 break;
-            case 4: b = "Onsdag"+" "+datei.toString()+".";
+            case 4: b = "Onsdag";
                 break;
-            case 5: b = "Torsdag"+" "+datei.toString()+".";
+            case 5: b = "Torsdag";
                 break;
-            case 6: b = "Fredag"+" "+datei.toString()+".";
+            case 6: b = "Fredag";
                 break;
-            case 7: b = "Lørdag"+" "+datei.toString()+".";
+            case 7: b = "Lørdag";
                 break;
-            case 1: b = "Søndag"+" "+datei.toString()+".";
+            case 1: b = "Søndag";
                 break;
         }
         java.util.Date date= new java.util.Date();
