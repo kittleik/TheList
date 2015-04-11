@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:background="@color/MintCream">
+    android:background="@color/Black">
 
     <LinearLayout
         android:orientation="vertical"
@@ -17,7 +17,9 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="&quot;Det er to ting jeg kan her i livet - Sjarmere jenter og fitte.&quot;"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/White"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,6 +28,8 @@
             android:text="- Alf Johansen, \n   Co-founder"
             android:id="@+id/textView8"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/White"
+            />
     </LinearLayout>
 </LinearLayout>
